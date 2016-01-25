@@ -8,6 +8,7 @@ var db = require('./db.js');
 var app = express();
 var PORT = process.env.PORT || 3000;
 
+app.use(bodyParser.json());
 
 app.get('/', function(req, res) {
 	res.send('News API');
@@ -16,7 +17,7 @@ app.get('/', function(req, res) {
 
 app.get('/news', function(req, res){
 	db.news.findAll().then(function(news){
-		res.json(todos);
+		res.json(news);
 	}, function (e){
 		res.status(500).send();
 	})
@@ -25,8 +26,8 @@ app.get('/news', function(req, res){
 app.post('/news', function (req, res){
 	var body = _.pick(req.body, 'title', 'description');
 
-	db.news.create(body).then(function(data) {
-		res.json(data.toJSON());	
+	db.news.create(body).then(function(news) {
+		res.json(news.toJSON());	
 	}, function(e) {
 		res.status(400).json(e);
 	});
