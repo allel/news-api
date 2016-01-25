@@ -15,7 +15,7 @@ if (env === 'production') {
 
 var db = {};
 
-db.todo = sequelize.import(__dirname + '/models/news.js');
+db.news = sequelize.import(__dirname + '/models/news.js');
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 module.exports = db;
